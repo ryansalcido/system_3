@@ -1,12 +1,12 @@
 language: node_js
 node_js:
-	- 12
+  - "12"
 cache:
-	directories:
-		- node_modules
+  directories:
+  - node_modules
 before_script:
-	- cd client/
+  - cd client/
 script:
-	- npm run build
+  - npm run build
 on:
-	branch: master
+  branch: master
