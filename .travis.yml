@@ -12,6 +12,7 @@ script:
 
 deploy:
   on:
+    provider: script
     skip_cleanup: true
     script: echo "About to deploy!"
     branch: master
