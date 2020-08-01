@@ -11,10 +11,10 @@ script:
   - echo "Finished building"
 
 deploy:
-  on:
-    provider: script
+  provider: script
     skip_cleanup: true
     script: echo "About to deploy!"
+  on:
     branch: master
     condition: $TRAVIS_PULL_REQUEST = false
 
