@@ -1,11 +1,18 @@
 language: node_js
 node_js:
   - "12"
+
 before_script:
   - cd client/
+
 script:
   - npm install
   - npm run build
-branches:
-  only: 
-    - master
+  - echo "Finished building"
+
+deploy:
+  on:
+    skip_cleanup: true
+    script: echo "About to deploy!"
+    branch: master
+    condition: $TRAVIS_PULL_REQUEST = false
