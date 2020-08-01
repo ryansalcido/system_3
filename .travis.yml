@@ -16,3 +16,7 @@ deploy:
     script: echo "About to deploy!"
     branch: master
     condition: $TRAVIS_PULL_REQUEST = false
+
+branches:
+  only:
+    - master
