@@ -5,6 +5,10 @@ node_js:
 before_script:
   - cd client/
 
+cache:
+  directories:
+    - client/node_modules
+
 script:
   - npm install
   - npm run build
