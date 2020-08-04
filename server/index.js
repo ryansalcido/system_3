@@ -25,5 +25,6 @@ app.use(apiErrorHandler);
 
 const publicPath = path.join(__dirname, "build");
 app.use("/system-3", express.static(publicPath));
+app.use("/system-3/*", express.static(publicPath));
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
