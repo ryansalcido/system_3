@@ -1,11 +1,13 @@
+import "react-app-polyfill/ie11";
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import SnackbarProvider from "./Context/SnackbarContext";
 
 ReactDOM.render(
-	<React.StrictMode>
+	<SnackbarProvider>
 		<App />
-	</React.StrictMode>,
+	</SnackbarProvider>,
 	document.getElementById("root")
 );
