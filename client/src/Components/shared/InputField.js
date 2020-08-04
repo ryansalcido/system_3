@@ -25,7 +25,7 @@ const InputField = (props) => {
 	return (
 		<InputGridContainer>
 			<TextField size="small" variant="outlined" fullWidth type="text" 
-				helperText={meta.touched && meta.error}
+				helperText={meta.touched && meta.error} className={classes.textFieldRoot}
 				error={meta.touched && meta.error ? true : false} {...field} {...props} />
 		</InputGridContainer>
 	);

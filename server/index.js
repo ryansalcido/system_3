@@ -4,6 +4,7 @@ const app = express();
 const path = require("path");
 const mongoose = require("mongoose");
 const baseRouter = require("./routes");
+const apiErrorHandler = require("./middleware/apiErrorHandler");
 const PORT = process.env.SYSTEM_3_PORT || 8444;
 
 app.disable("x-powered-by");
@@ -20,6 +21,7 @@ db.once("open", () => console.log("Connected to database"));
 app.use(express.json());
 
 app.use("/system-3", baseRouter);
+app.use(apiErrorHandler);
 
 const publicPath = path.join(__dirname, "build");
 app.use("/system-3", express.static(publicPath));

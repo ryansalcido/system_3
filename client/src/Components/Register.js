@@ -19,11 +19,7 @@ const validationSchema = Yup.object({
 		.required("Required"),
 	email: Yup.string()
 		.email("Invalid email address")
-		.required("Required")
-		.test("email", "Email is already taken", value => {
-			console.log("EMAIL VALUE: ", value);
-			return true;
-		}),
+		.required("Required"),
 	password: Yup.string()
 		.min(8, "Must be at least 8 characters")
 		.required("Required")
@@ -49,7 +45,7 @@ const Register = () => {
 				onSubmit={(values) => {
 					console.log("SUBMIT: ", values);
 				}}>
-				{({ values, dirty, isValid }) => (
+				{({ dirty, isValid }) => (
 					<Form>
 						<Grid container alignItems="center" spacing={2} direction="column">
 							<Typography variant="h4" color="secondary" gutterBottom>Register</Typography>
@@ -70,7 +66,7 @@ const Register = () => {
 									register
 								</Button>
 							</InputGridContainer>
-							<InputGridContainer>
+							<InputGridContainer innerGridProps={{container: true, justify: "center"}}>
 								<Link variant="body2" color="secondary" href="login">Already have an account? Sign in</Link>
 							</InputGridContainer>
 						</Grid>
