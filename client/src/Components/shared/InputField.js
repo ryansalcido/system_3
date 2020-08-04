@@ -18,9 +18,6 @@ const useStyles = makeStyles(() => ({
 const InputField = (props) => {
 	const classes = useStyles();
 	const [ field, meta ] = useField(props);
-	// console.log("FIELD: ", field);
-	// console.log("META: ", meta);
-	// console.log("PROPS: ", props);
 
 	return (
 		<InputGridContainer>

@@ -4,10 +4,10 @@ const User = require("../models/User");
 const { registerSchema } = require("../utils/validationSchema");
 const validateForm = require("../middleware/validateForm");
 const ApiError = require("../utils/apiError");
+const apiSuccess = require("../utils/apiSuccess");
 
 userRouter.post("/register", validateForm(registerSchema), (req, res, next) => {
 	const { name, email, password } = req.body;
-	console.log("POST: ", name, email, password);
 	const normalizedEmail = email.trim().toLowerCase();
 	User.findOne({email: normalizedEmail}, (err, user) => {
 		if(err) {
@@ -20,7 +20,7 @@ userRouter.post("/register", validateForm(registerSchema), (req, res, next) => {
 				if(err) {
 					next(ApiError.handleError(500, "Error has occurred during registration"));
 				} else {
-					res.status(201).json({error: false, msg: "Account successfully created"});
+					return apiSuccess(res, 201, "Successfully created account!");
 				}
 			});
 		}
