@@ -1,15 +1,14 @@
 import React, { useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHistory } from "react-router-dom";
-import Grid from "@material-ui/core/Grid";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import InputField from "./shared/InputField";
-import InputGridContainer from "./shared/InputGridContainer";
-import PasswordRevealButton from "./shared/PasswordRevealButton";
-import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined";
-import CreateIcon from "@material-ui/icons/Create";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import Avatar from "@material-ui/core/Avatar";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import Grid from "@material-ui/core/Grid";
+import InputGridContainer from "./shared/InputGridContainer";
+import InputField from "./shared/InputField";
+import PasswordRevealButton from "./shared/PasswordRevealButton";
 import Link from "@material-ui/core/Link";
 import { SnackbarContext } from "../Context/SnackbarContext";
 import { Formik, Form } from "formik";
@@ -17,19 +16,15 @@ import * as Yup from "yup";
 import axiosInstance from "../utils/axiosInstance";
 
 const validationSchema = Yup.object({
-	name: Yup.string()
-		.min(3, "Must be at least 3 characters")
-		.required("Required"),
 	email: Yup.string()
 		.email("Invalid email address")
 		.required("Required"),
 	password: Yup.string()
-		.min(8, "Must be at least 8 characters")
 		.required("Required")
 });
 
 const useStyles = makeStyles(theme => ({
-	registerRoot: {
+	loginRoot: {
 		padding: theme.spacing(2)
 	},
 	personAvatar: {
@@ -37,39 +32,33 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-const Register = () => {
+const Login = () => {
 	const classes = useStyles();
 	const { openSnackbar } = useContext(SnackbarContext);
-	const history = useHistory();
 	const [ showPassword, setShowPassword ] = useState(false);
 
-	const onRegisterSubmit = (values, { setFieldError, resetForm }) => {
-		axiosInstance.post("user/register", values).then(res => {
-			const { payload } = res.data;
-			resetForm();
-			openSnackbar({message: payload, severity: "success"});
-			history.push("/login");
+	const onLoginSubmit = (values) => {
+		axiosInstance.post("user/login", values).then(res => {
+			const { message } = res.data && res.data.payload;
+			openSnackbar({message, severity: "success"});
 		}).catch(error => {
-			const { payload } = error.response && error.response.data;
-			if(payload === "Email is already in use.") {
-				setFieldError("email", payload);
-				openSnackbar({message: payload, severity: "error"});
+			if(error.response && error.response.status === 401) {
+				openSnackbar({message: "The username or password you have entered is invalid.", severity: "error"});
 			}
 		});
 	};
 
 	return (
-		<div className={classes.registerRoot}>
-			<Formik initialValues={{name: "", email: "", password: ""}} 
-				validationSchema={validationSchema} onSubmit={onRegisterSubmit}>
+		<div className={classes.loginRoot}>
+			<Formik initialValues={{email: "", password: ""}} 
+				validationSchema={validationSchema} onSubmit={onLoginSubmit}>
 				{({ dirty, isValid }) => (
 					<Form>
 						<Grid container alignItems="center" spacing={2} direction="column">
-							<Typography variant="h4" color="secondary" gutterBottom>Register</Typography>
+							<Typography variant="h4" color="secondary" gutterBottom>Login</Typography>
 							<Avatar className={classes.personAvatar}>
-								<PersonOutlineOutlinedIcon />
+								<LockOutlinedIcon />
 							</Avatar>
-							<InputField label="Full Name" name="name" type="text" />
 							<InputField label="Email" name="email" type="email" />
 							<InputField label="Password" name="password"
 								type={showPassword ? "text" : "password"}
@@ -78,13 +67,15 @@ const Register = () => {
 										onClick={() => setShowPassword(showPassword => !showPassword)} />
 								}} />
 							<InputGridContainer>
-								<Button variant="contained" fullWidth startIcon={<CreateIcon />} 
+								<Button variant="contained" fullWidth startIcon={<ExitToAppIcon />} 
 									type="submit" color="primary" disabled={!(dirty && isValid)}>
-									register
+									login
 								</Button>
 							</InputGridContainer>
 							<InputGridContainer innerGridProps={{container: true, justify: "center"}}>
-								<Link variant="body2" color="secondary" href="login">Already have an account? Sign in</Link>
+								<Link variant="body2" color="secondary" href="register">
+									{"Don't have an account? Sign Up"}
+								</Link>
 							</InputGridContainer>
 						</Grid>
 					</Form>
@@ -94,4 +85,4 @@ const Register = () => {
 	);
 };
 
-export default Register;
+export default Login;

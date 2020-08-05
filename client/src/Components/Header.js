@@ -27,7 +27,10 @@ const Header = () => {
 			<Toolbar className={classes.toolbar}>
 				<Grid container alignItems="center" justify="space-between">
 					<img src={System3} alt="SYSTEM III" width="125" height="15" />
-					<Button component={Link} to="/register" classes={{root: classes.buttonRoot}}>register</Button>
+					<Grid item>
+						<Button component={Link} to="/register" classes={{root: classes.buttonRoot}}>register</Button>
+						<Button component={Link} to="/login" classes={{root: classes.buttonRoot}}>login</Button>
+					</Grid>
 				</Grid>
 			</Toolbar>
 		</AppBar>

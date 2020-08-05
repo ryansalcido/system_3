@@ -1,4 +1,4 @@
-const ApiError = require("../utils/apiError");
+const { ApiError } = require("../utils/apiStatus");
 
 function validateForm(schema) {
 	return async (req, res, next) => {

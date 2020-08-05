@@ -6,6 +6,7 @@ import theme from "./theme";
 import Header from "./Components/Header";
 import Home from "./Components/Home";
 import Register from "./Components/Register";
+import Login from "./Components/Login";
 
 const App = () => {
 	const themeConfig = createMuiTheme(theme);
@@ -18,6 +19,7 @@ const App = () => {
 				<Switch>
 					<Route exact path="/" component={Home} />
 					<Route exact path="/register" component={Register} />
+					<Route exact path="/login" component={Login} />
 				</Switch>
 			</Router>
 		</ThemeProvider>
