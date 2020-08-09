@@ -11,6 +11,7 @@ import InputField from "./shared/InputField";
 import PasswordRevealButton from "./shared/PasswordRevealButton";
 import Link from "@material-ui/core/Link";
 import { SnackbarContext } from "../Context/SnackbarContext";
+import { AuthContext } from "../Context/AuthContext";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import axiosInstance from "../utils/axiosInstance";
@@ -35,15 +36,18 @@ const useStyles = makeStyles(theme => ({
 const Login = () => {
 	const classes = useStyles();
 	const { openSnackbar } = useContext(SnackbarContext);
+	const { setIsAuthenticated, setUser } = useContext(AuthContext);
 	const [ showPassword, setShowPassword ] = useState(false);
 
 	const onLoginSubmit = (values) => {
 		axiosInstance.post("user/login", values).then(res => {
-			const { message } = res.data && res.data.payload;
+			const { isAuthenticated, user, message } = res.data && res.data.payload;
 			openSnackbar({message, severity: "success"});
+			setUser(user);
+			setIsAuthenticated(isAuthenticated);
 		}).catch(error => {
 			if(error.response && error.response.status === 401) {
-				openSnackbar({message: "The username or password you have entered is invalid.", severity: "error"});
+				openSnackbar({message: "The email or password you have entered is invalid.", severity: "error"});
 			}
 		});
 	};

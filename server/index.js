@@ -4,11 +4,12 @@ const app = express();
 const path = require("path");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
+const helmet = require("helmet");
 const baseRouter = require("./routes");
 const apiErrorHandler = require("./middleware/apiErrorHandler");
 const PORT = process.env.SYSTEM_3_PORT || 8444;
 
-app.disable("x-powered-by");
+app.use(helmet());
 app.use(cookieParser());
 
 mongoose.set("useNewUrlParser", true);

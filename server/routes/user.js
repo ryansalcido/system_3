@@ -49,4 +49,9 @@ userRouter.post("/login", validateForm(loginSchema), passport.authenticate("loca
 	}
 });
 
+userRouter.get("/isAuthenticated", passport.authenticate("jwt", {session: false}), (req, res) => {
+	const { name, email } = req.user;
+	return handleSuccess(res, 200, {isAuthenticated: true, message: "Authenticated", user: { name, email }});
+});
+
 module.exports = userRouter;
