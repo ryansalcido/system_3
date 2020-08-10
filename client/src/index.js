@@ -4,13 +4,10 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import SnackbarProvider from "./Context/SnackbarContext";
-import AuthProvider from "./Context/AuthContext";
 
 ReactDOM.render(
 	<SnackbarProvider>
-		<AuthProvider>
-			<App />
-		</AuthProvider>
+		<App />
 	</SnackbarProvider>,
 	document.getElementById("root")
 );

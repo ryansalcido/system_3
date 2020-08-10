@@ -12,7 +12,6 @@ const useStyles = makeStyles(() => ({
 	},
 	loadingRoot: {
 		minHeight: "inherit",
-		backgroundColor: "#303030",
 		//Set height to a value guaranteed to be less than minHeight to fix alignItems bug in IE11
 		//Without manually settting height, content is not vertically aligned
 		height: "5px"
