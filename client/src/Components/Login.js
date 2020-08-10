@@ -77,7 +77,7 @@ const Login = () => {
 								</Button>
 							</InputGridContainer>
 							<InputGridContainer innerGridProps={{container: true, justify: "center"}}>
-								<Link variant="body2" color="secondary" href="register">
+								<Link variant="body2" color="secondary" href="/system-3/register">
 									{"Don't have an account? Sign Up"}
 								</Link>
 							</InputGridContainer>
