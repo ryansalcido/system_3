@@ -2,9 +2,10 @@ language: node_js
 node_js:
   - "12"
 
-install:
-  - echo "$PUBLIC_KEY" >> $HOME/.ssh/known_hosts
-
+addons:
+  ssh_known_hosts:
+    - 208.68.39.96
+ 
 cache:
   directories:
   - client/node_modules
