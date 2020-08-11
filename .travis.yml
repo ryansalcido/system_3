@@ -3,11 +3,11 @@ node_js:
   - "12"
 
 addons:
-  ssh_known_hosts: $IP
+  ssh_known_hosts: $IP_ADDRESS
 
 cache:
   directories:
-    - client/node_modules
+  - client/node_modules
 
 script:
   - cd client/
