@@ -2,26 +2,35 @@ language: node_js
 node_js:
   - "12"
 
-before_script:
-  - cd client/
+addons:
+  ssh_known_hosts: $IP
 
 cache:
   directories:
     - client/node_modules
 
 script:
+  - cd client/
   - npm install
   - npm run build
-  - echo "Finished building"
+
+before_deploy:
+  - openssl aes-256-cbc -K $encrypted_db2095f63ba3_key -iv $encrypted_db2095f63ba3_iv
+  - in deploy_rsa.enc -out /tmp/deploy_rsa -d
+  - eval "$(ssh-agent -s)"
+  - chmod 600 /tmp/deploy_rsa
+  - ssh-add /tmp/deploy_rsa
 
 deploy:
   provider: script
   skip_cleanup: true
-  script: echo "About to deploy!"
-  on:
-    branch: master
-    condition: $TRAVIS_PULL_REQUEST = false
+  script: ssh $USER@$IP_ADDRESS "./deploy.sh"
+  # on:
+  #   branch: master
+  #   condition: "$TRAVIS_PULL_REQUEST = false"
 
-branches:
-  only:
-    - master
+
+
+# branches:
+#   only:
+#     - master
