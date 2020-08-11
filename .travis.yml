@@ -2,8 +2,8 @@ language: node_js
 node_js:
   - "12"
 
-addons:
-  ssh_known_hosts: $IP_ADDRESS
+install:
+  - echo "$PUBLIC_KEY" >> $HOME/.ssh/known_hosts
 
 cache:
   directories:
