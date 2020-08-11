@@ -25,12 +25,5 @@ deploy:
   provider: script
   skip_cleanup: true
   script: ssh $USER@$IP_ADDRESS "./deploy.sh"
-  # on:
-  #   branch: master
-  #   condition: "$TRAVIS_PULL_REQUEST = false"
-
-
-
-# branches:
-#   only:
-#     - master
+  on:
+    branch: master
