@@ -11,5 +11,11 @@ module.exports = {
 		password: yup.string()
 			.min(8, "Must be at least 8 characters")
 			.required("Required")
+	}),
+	loginSchema: yup.object().shape({
+		email: yup.string()
+			.required("Required"),
+		password: yup.string()
+			.required("Required")
 	})
 };

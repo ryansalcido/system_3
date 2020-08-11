@@ -1,11 +1,11 @@
-import React from "react";
+import React, { Fragment, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
 import System3 from "../assets/images/System3.png";
+import ButtonLink from "./shared/ButtonLink";
 
 const useStyles = makeStyles(() => ({
 	appBar: {
@@ -13,21 +13,34 @@ const useStyles = makeStyles(() => ({
 	},
 	toolbar: {
 		minHeight: 40
-	},
-	buttonRoot: {
-		color: "black"
 	}
 }));
 
 const Header = () => {
 	const classes = useStyles();
+	const { isAuthenticated } = useContext(AuthContext);
 
 	return (
 		<AppBar color="primary" position="static" className={classes.appBar}>
 			<Toolbar className={classes.toolbar}>
 				<Grid container alignItems="center" justify="space-between">
 					<img src={System3} alt="SYSTEM III" width="125" height="15" />
-					<Button component={Link} to="/register" classes={{root: classes.buttonRoot}}>register</Button>
+					<Grid item>
+						{isAuthenticated
+							? (
+								<Fragment>
+									<ButtonLink to="/" text="home" />
+									<ButtonLink to="/dashboard" text="dashboard" />
+								</Fragment>
+							) : (
+								<Fragment>
+									<ButtonLink to="/" text="home" />
+									<ButtonLink to="/register" text="register" />
+									<ButtonLink to="/login" text="login" />
+								</Fragment>
+							)
+						}
+					</Grid>
 				</Grid>
 			</Toolbar>
 		</AppBar>
