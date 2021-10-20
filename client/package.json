@@ -17,13 +17,13 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@material-ui/styles": "^4.10.0",
-    "axios": "^0.20.0",
+    "axios": "^0.21.3",
     "formik": "^2.1.5",
     "react": "^16.13.1",
     "react-app-polyfill": "^1.0.6",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3",
+    "react-scripts": "4.0.0",
     "yup": "^0.29.3"
   },
   "devDependencies": {
