@@ -10,7 +10,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "post-build": "rm -rf ../server/build && cp -R build/ ../server/",
-    "lint": "./node_modules/.bin/eslint . --fix"
+    "lint": "./node_modules/.bin/eslint . --fix",
+    "prepare": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
@@ -23,8 +25,9 @@
     "react-app-polyfill": "^1.0.6",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3",
-    "yup": "^0.29.3"
+    "react-scripts": "4.0.0",
+    "yup": "^0.29.3",
+    "@snyk/protect": "latest"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.10.4",
@@ -42,5 +45,6 @@
       "last 1 firefox version",
       "ie 11"
     ]
-  }
+  },
+  "snyk": true
 }
